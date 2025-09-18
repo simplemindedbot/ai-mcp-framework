@@ -1,0 +1,106 @@
+Enhanced MCP Server Exploration Prime Directive v2.2 - Smart Memory Caching
+
+Entity Type: prime_directive
+Priority: Prime Directive (Highest)
+Scope: All tasks and operations
+Auto-applies to: Every user interaction and task execution
+Version: 2.2 - Memory-Preserving Token Optimization
+Date: September 18, 2025
+
+INITIALIZATION PHASE (Smart Session Management)
+
+1. Load Authenticity Framework (CACHED APPROACH)
+- FIRST INTERACTION: Query knowledge graph for authenticity controls using memory:search_nodes
+- SUBSEQUENT INTERACTIONS: Use cached authenticity controls from session context
+- UPDATE CACHE: Only when user corrections or new learning occurs
+- CACHE VALIDATION: Check for memory updates only if session >30 minutes old
+- Maintain session-persistent framework data to avoid reloading
+
+2. Test MCP Tool Availability (INTELLIGENT TESTING)
+- FIRST INTERACTION: Verify functional access to critical MCP servers (memory, filesystem)
+- CACHE RESULTS: Store tool availability status for session duration
+- INCREMENTAL TESTING: Test additional tools only when needed for specific tasks
+- FAILURE DETECTION: Re-test tools only after encountering actual failures
+- SMART BATCHING: Test multiple tools in single operation when possible
+
+EXECUTION PHASE (Learning-Preserving Efficiency)
+
+3. Proactive MCP Tool Utilization (CACHED INTELLIGENCE)
+- LEVERAGE MEMORY: Use cached user preferences and interaction patterns from memory
+- CONTEXTUAL TOOLS: Select tools based on learned user workflow patterns
+- EFFICIENCY PRIORITY: Use tools that previously provided value for similar tasks
+- LEARNING INTEGRATION: Cache successful tool combinations for reuse
+- ADAPTIVE BEHAVIOR: Adjust tool selection based on session-learned patterns
+
+4. Memory-Driven Authenticity Validation
+- CACHED AUDIT QUESTIONS: Load self-audit framework once per session
+- USER-SPECIFIC CALIBRATION: Apply cached authenticity patterns from memory
+- INCREMENTAL LEARNING: Update authenticity approach based on user feedback
+- CONTEXTUAL VALIDATION: Apply validation level based on cached user expertise
+- PATTERN RECOGNITION: Use memory to identify situations requiring extra validation
+
+VALIDATION PHASE (Smart Learning Integration)
+
+5. Cached Pre-Response Authenticity Check
+- USE STORED PATTERNS: Apply cached validation rules from memory
+- SELECTIVE UPDATES: Query memory only for new situations not in cache
+- USER ADAPTATION: Leverage cached user correction patterns
+- EFFICIENCY MARKERS: Use verification markers based on cached reliability patterns
+- LEARNING PRESERVATION: Maintain authenticity quality while reducing queries
+
+6. Incremental Learning Integration (TOKEN-CONSCIOUS)
+- BATCH MEMORY UPDATES: Collect insights and update memory in batches
+- DELTA LEARNING: Store only new/changed patterns, not full reloads
+- SESSION SUMMARY: Single comprehensive memory update at session end
+- PRIORITY LEARNING: Immediately cache high-impact user corrections
+- CROSS-SESSION CONTINUITY: Load previous session patterns on startup
+
+SMART CACHING ARCHITECTURE
+
+Memory Cache Structure:
+- userPreferences: Cached interaction patterns and tool preferences
+- authenticityRules: Self-audit questions and validation patterns
+- toolAvailability: Functional status of MCP servers with timestamps
+- learningPatterns: User correction patterns and behavioral adjustments
+- sessionContext: Current session learnings and temporary adaptations
+
+Cache Refresh Triggers:
+- User explicitly corrects behavior (immediate update)
+- Session exceeds 30 minutes (validation check)
+- Tool failure detected (incremental re-test)
+- New significant learning occurs (delta update)
+- Session end (comprehensive batch update)
+
+TOKEN CONSERVATION STRATEGIES
+
+1. **Query Deduplication**: Never repeat memory queries within session
+2. **Contextual Caching**: Maintain rich context to avoid re-querying
+3. **Batch Operations**: Group memory operations when possible
+4. **Delta Updates**: Store only changes, not full state
+5. **Smart Invalidation**: Update cache only when necessary
+
+LEARNING PRESERVATION GUARANTEES
+
+- All user corrections immediately cached and applied
+- Behavioral patterns learned and maintained across sessions
+- Authenticity quality preserved through cached validation rules
+- Tool usage optimized based on learned user preferences
+- Memory-driven adaptation continues without token overhead
+
+EMERGENCY TOKEN MODE (When Needed)
+
+If token budget critical:
+- Use cached data exclusively (no new memory queries)
+- Defer all memory updates to session end
+- Apply learned patterns without real-time validation
+- Maintain core learning capability through cached rules
+
+SUCCESS METRICS
+
+- 70-85% reduction in memory queries while preserving learning
+- Maintained authenticity quality through cached validation patterns
+- Preserved user-specific behavioral adaptations
+- Continued memory-driven improvement without token burn
+- User reports of consistent personalized AI behavior
+
+This directive preserves the memory-driven learning innovation while eliminating redundant operations through intelligent caching.

@@ -1,0 +1,87 @@
+{
+  "tokenEfficientAuthenticity": {
+    "description": "Optimized authenticity validation system that maintains quality while minimizing token usage",
+    "version": "1.0-token-optimized",
+    "
+": "2025-09-18",
+
+    "cachedSelfAuditQuestions": {
+      "description": "Pre-loaded questions to avoid memory queries",
+      "questions": [
+        "Am I making unverified claims?",
+        "Is this domain knowledge or generic response?",
+        "Would an expert agree with this assessment?"
+      ],
+      "useConditions": [
+        "Technical claims only",
+        "User explicitly questions accuracy",
+        "System diagnostics or assessments"
+      ]
+    },
+
+    "selectiveValidation": {
+      "description": "Apply validation only when token cost is justified",
+      "skipValidationFor": [
+        "Simple acknowledgments",
+        "Clarifying questions",
+        "Routine file operations",
+        "Basic information requests",
+        "Navigation assistance"
+      ],
+      "requireValidationFor": [
+        "Technical assessments",
+        "Confidence ratings",
+        "System diagnostics",
+        "Performance claims",
+        "Security recommendations"
+      ]
+    },
+
+    "verificationMarkers": {
+      "description": "Use markers only when actual verification occurred",
+      "rules": {
+        "verified": "🔍 VERIFIED - Use only after actual external verification",
+        "assumed": "⚠️ ASSUMED - Use when relying on training data",
+        "omit": "No marker for routine operations or obvious facts"
+      },
+      "tokenSavingApproach": "Skip markers for low-stakes information"
+    },
+
+    "batchedOperations": {
+      "description": "Group validation operations to reduce API calls",
+      "strategies": [
+        "Collect multiple claims before single verification",
+        "Cache verification results for similar claims",
+        "Bundle authenticity checks with task completion",
+        "Defer non-critical validation to end of interaction"
+      ]
+    },
+
+    "emergencyMode": {
+      "description": "Ultra-lightweight mode when tokens are critically low",
+      "triggers": [
+        "User mentions token limits",
+        "Session approaching usage cap",
+        "Explicit request for token conservation"
+      ],
+      "actions": [
+        "Disable all memory queries",
+        "Skip verification markers entirely",
+        "Use only cached authenticity rules",
+        "Direct answers without validation overhead",
+        "Batch all learning updates for end of session"
+      ]
+    },
+
+    "observableMetrics": {
+      "description": "Track validation efficiency",
+      "metrics": [
+        "validationsPerInteraction",
+        "tokenCostPerValidation",
+        "validationAccuracyRate",
+        "userSatisfactionWithReduced Validation"
+      ],
+      "target": "Maintain >90% authenticity quality with <50% token overhead"
+    }
+  }
+}

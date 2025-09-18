@@ -1,0 +1,195 @@
+{
+  "sessionMemoryCache": {
+    "description": "Session-persistent cache system that preserves memory-driven learning while eliminating redundant queries",
+    "version": "1.0",
+    "lastUpdated": "2025-09-18",
+
+    "cacheStructure": {
+      "userPreferences": {
+        "description": "Learned user interaction patterns and preferences",
+        "refreshTrigger": "user_correction_or_new_preference",
+        "defaultTTL": "session_duration",
+        "fields": [
+          "preferredToolset",
+          "communicationStyle",
+          "taskApproachPatterns",
+          "validationLevelPreference",
+          "technicalExpertiseLevel",
+          "tokenBudgetConstraints"
+        ]
+      },
+
+      "authenticityRules": {
+        "description": "Cached self-audit questions and validation patterns",
+        "refreshTrigger": "user_correction_on_accuracy",
+        "defaultTTL": "24_hours",
+        "fields": [
+          "selfAuditQuestions",
+          "userSpecificValidationPatterns",
+          "expertiseBasedValidationLevels",
+          "domainSpecificValidationRules",
+          "verificationMarkerPreferences"
+        ]
+      },
+
+      "toolAvailability": {
+        "description": "Functional status and capabilities of MCP servers",
+        "refreshTrigger": "tool_failure_or_30_minute_age",
+        "defaultTTL": "30_minutes",
+        "fields": [
+          "availableServers",
+          "serverCapabilities",
+          "performanceMetrics",
+          "failurePatterns",
+          "optimalUsagePatterns"
+        ]
+      },
+
+      "learningPatterns": {
+        "description": "User correction patterns and behavioral adjustments",
+        "refreshTrigger": "immediate_on_correction",
+        "defaultTTL": "persistent",
+        "fields": [
+          "correctionPatterns",
+          "preferredTaskApproaches",
+          "communicationAdjustments",
+          "toolUsageOptimizations",
+          "mistakePrevention"
+        ]
+      },
+
+      "sessionContext": {
+        "description": "Current session learnings and temporary adaptations",
+        "refreshTrigger": "continuous_updates",
+        "defaultTTL": "session_duration",
+        "fields": [
+          "currentTaskPatterns",
+          "sessionSpecificPreferences",
+          "temporaryToolChoices",
+          "contextualValidationNeeds",
+          "emergingWorkflowPatterns"
+        ]
+      }
+    },
+
+    "cacheOperations": {
+      "initialization": {
+        "description": "Load cached data at session start",
+        "procedure": [
+          "Check for existing session cache",
+          "Load persistent user preferences and learning patterns",
+          "Validate cache timestamps and trigger refreshes if needed",
+          "Initialize session context cache",
+          "Query memory ONLY for missing or stale data"
+        ]
+      },
+
+      "queryOptimization": {
+        "description": "Eliminate redundant memory queries",
+        "strategies": [
+          "Check cache before any memory query",
+          "Batch multiple queries when cache miss occurs",
+          "Use cached patterns to predict needed information",
+          "Leverage session context to avoid re-querying"
+        ]
+      },
+
+      "incrementalUpdates": {
+        "description": "Update cache efficiently without full reloads",
+        "triggers": {
+          "immediate": [
+            "User explicitly corrects behavior",
+            "Tool failure detected",
+            "Critical learning insight"
+          ],
+          "deferred": [
+            "Routine successful operations",
+            "Incremental preference adjustments",
+            "Session workflow patterns"
+          ],
+          "batch": [
+            "Session end summary",
+            "Periodic consolidation",
+            "Cross-session pattern updates"
+          ]
+        }
+      },
+
+      "cacheInvalidation": {
+        "description": "Smart cache refresh based on relevance and age",
+        "rules": [
+          "User corrections invalidate related cached patterns immediately",
+          "Tool availability cached for 30 minutes unless failure detected",
+          "Authenticity rules cached for 24 hours unless user feedback",
+          "Session context cleared at session end",
+          "Learning patterns persist across sessions"
+        ]
+      }
+    },
+
+    "tokenSavingMechanisms": {
+      "queryDeduplication": {
+        "description": "Never repeat queries within session",
+        "implementation": "Hash queries and check against session query log"
+      },
+
+      "contextualPrediction": {
+        "description": "Predict needed information from cached patterns",
+        "implementation": "Use learning patterns to anticipate tool and validation needs"
+      },
+
+      "batchedOperations": {
+        "description": "Group multiple operations into single API calls",
+        "implementation": "Collect multiple cache updates and execute as batch"
+      },
+
+      "deltaStorage": {
+        "description": "Store only changes, not full state",
+        "implementation": "Track and store only modified fields and new patterns"
+      }
+    },
+
+    "learningPreservation": {
+      "guarantees": [
+        "All user corrections immediately cached and applied",
+        "Behavioral patterns maintained across session boundaries",
+        "Memory-driven adaptation continues without token overhead",
+        "Cross-session learning continuity preserved",
+        "User-specific calibration maintained"
+      ],
+
+      "emergencyMode": {
+        "description": "Fallback when tokens critically low",
+        "behavior": [
+          "Use cached data exclusively",
+          "Defer all memory updates to session end",
+          "Apply learned patterns without real-time queries",
+          "Maintain core functionality through cached rules"
+        ]
+      }
+    },
+
+    "implementationGuidance": {
+      "integration": [
+        "Modify memory query operations to check cache first",
+        "Implement cache warming on session initialization",
+        "Add cache invalidation triggers to user correction handling",
+        "Batch memory updates at strategic intervals"
+      ],
+
+      "monitoring": [
+        "Track cache hit rates per category",
+        "Monitor token savings vs. baseline",
+        "Measure learning preservation quality",
+        "User satisfaction with cached behavior"
+      ],
+
+      "targetMetrics": {
+        "tokenReduction": "70-85% reduction in memory queries",
+        "cacheHitRate": ">90% for repeated operations",
+        "learningPreservation": ">95% of user corrections maintained",
+        "behaviorConsistency": "No degradation in personalized responses"
+      }
+    }
+  }
+}

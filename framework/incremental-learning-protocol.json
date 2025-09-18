@@ -1,0 +1,215 @@
+{
+  "incrementalLearningProtocol": {
+    "description": "Token-efficient learning system that preserves memory-driven adaptation through delta updates and smart batching",
+    "version": "1.0",
+    "designPrinciple": "Learn continuously, update incrementally, preserve completely",
+    "lastUpdated": "2025-09-18",
+
+    "learningCategories": {
+      "immediateUpdates": {
+        "description": "Critical learnings that require instant memory updates",
+        "triggers": [
+          "User explicitly corrects AI behavior",
+          "User provides new preference information",
+          "Tool usage failure or success pattern emerges",
+          "User indicates frustration with current approach",
+          "Security or safety correction needed"
+        ],
+        "updateMethod": "single_focused_memory_write",
+        "tokenCost": "minimal_single_operation",
+        "examples": [
+          "User says: 'I prefer less verbose explanations'",
+          "User corrects: 'That approach won't work in our environment'",
+          "Tool failure: User reports authentication issue with specific MCP server"
+        ]
+      },
+
+      "deferredUpdates": {
+        "description": "Important patterns that can be batched for efficiency",
+        "triggers": [
+          "Successful task completion patterns",
+          "Tool preference patterns emerging",
+          "Communication style adjustments",
+          "Workflow optimization insights",
+          "Technical competency observations"
+        ],
+        "updateMethod": "batched_session_updates",
+        "tokenCost": "efficient_batch_operation",
+        "batchingRules": [
+          "Collect 3-5 related insights before updating",
+          "Update at natural conversation breaks",
+          "Consolidate similar pattern types",
+          "Prioritize user-facing improvements"
+        ]
+      },
+
+      "sessionSummaryUpdates": {
+        "description": "Comprehensive learnings that update at session end",
+        "triggers": [
+          "Overall interaction quality patterns",
+          "Long-term preference evolution",
+          "Cross-session workflow improvements",
+          "Meta-learning about learning effectiveness",
+          "User satisfaction and efficiency trends"
+        ],
+        "updateMethod": "comprehensive_session_summary",
+        "tokenCost": "single_comprehensive_operation",
+        "consolidationLogic": [
+          "Aggregate micro-patterns into macro-insights",
+          "Identify persistent vs. temporary preferences",
+          "Update long-term user model",
+          "Refine authenticity calibration"
+        ]
+      }
+    },
+
+    "deltaUpdateMechanism": {
+      "description": "Store only changes and new information, not full state",
+      "implementation": {
+        "changeDetection": [
+          "Compare new insights against cached patterns",
+          "Identify genuinely new information vs. reinforcement",
+          "Flag contradictions that require pattern updates",
+          "Detect emerging trends requiring pattern adjustments"
+        ],
+
+        "deltaStorage": [
+          "Store modification timestamps",
+          "Track confidence changes in existing patterns",
+          "Add new patterns without rewriting existing ones",
+          "Update pattern weights based on reinforcement"
+        ],
+
+        "conflictResolution": [
+          "New user correction overrides previous patterns",
+          "Recent patterns weighted higher than old ones",
+          "Explicit user statements override inferred patterns",
+          "Context-specific patterns preserved alongside general ones"
+        ]
+      }
+    },
+
+    "learningEfficiency": {
+      "patternRecognition": {
+        "description": "Identify learning opportunities without excessive memory queries",
+        "strategies": [
+          "Use cached user patterns to predict learning needs",
+          "Recognize repeated user corrections as high-priority patterns",
+          "Identify task types that benefit from specific approaches",
+          "Track tool combinations that work well for user"
+        ]
+      },
+
+      "redundancyElimination": {
+        "description": "Avoid learning and storing duplicate information",
+        "methods": [
+          "Check cached patterns before creating new ones",
+          "Merge similar patterns rather than creating duplicates",
+          "Recognize when new information reinforces existing patterns",
+          "Consolidate related insights into coherent patterns"
+        ]
+      },
+
+      "prioritizedLearning": {
+        "description": "Focus learning on highest-impact improvements",
+        "priorities": [
+          "User satisfaction and efficiency improvements",
+          "Task completion accuracy and speed",
+          "Communication style optimization",
+          "Tool usage effectiveness",
+          "Error prevention and correction"
+        ]
+      }
+    },
+
+    "batchingStrategies": {
+      "smartBatching": {
+        "description": "Group related updates for maximum efficiency",
+        "groupingCriteria": [
+          "Related to same user preference category",
+          "Similar tool usage patterns",
+          "Connected workflow improvements",
+          "Same authenticity validation patterns"
+        ],
+        "batchTriggers": [
+          "Natural conversation pauses",
+          "Task completion milestones",
+          "User switches topics",
+          "Accumulation of 3-5 related insights"
+        ]
+      },
+
+      "opportunisticUpdates": {
+        "description": "Piggyback learning updates on necessary memory operations",
+        "implementation": [
+          "When querying memory for task needs, append learning updates",
+          "Combine user preference updates with tool status checks",
+          "Merge pattern updates with authenticity rule refreshes",
+          "Bundle session insights with periodic cache refreshes"
+        ]
+      }
+    },
+
+    "learningPreservationGuarantees": {
+      "criticalProtections": [
+        "User corrections are never lost or delayed",
+        "Safety-related learnings get immediate memory updates",
+        "Preference changes are cached instantly and persist",
+        "Error patterns are learned and prevented"
+      ],
+
+      "continuityMaintenance": [
+        "Cross-session learning patterns preserved",
+        "User-specific calibration maintained through caching",
+        "Behavioral improvements accumulate over time",
+        "Memory-driven adaptation continues with reduced token overhead"
+      ],
+
+      "qualityMetrics": [
+        "Learning effectiveness measured by reduced user corrections",
+        "Pattern accuracy validated by user satisfaction",
+        "Behavioral consistency tracked across sessions",
+        "Adaptation speed measured by implementation of corrections"
+      ]
+    },
+
+    "emergencyLearningMode": {
+      "description": "Maintain learning capability even under extreme token constraints",
+      "fallbackBehavior": [
+        "Defer all learning updates to session end",
+        "Cache all insights without immediate memory writes",
+        "Apply cached patterns without real-time validation",
+        "Preserve critical user corrections in temporary storage"
+      ],
+      "recoveryProtocol": [
+        "Execute deferred learning updates when token budget allows",
+        "Prioritize user satisfaction patterns over efficiency patterns",
+        "Validate critical cached insights with selective memory queries",
+        "Resume normal incremental learning when constraints lift"
+      ]
+    },
+
+    "implementationGuidance": {
+      "integration": [
+        "Add delta detection logic to learning operations",
+        "Implement batching queues for deferred updates",
+        "Create cached pattern checking before memory writes",
+        "Design session summary consolidation process"
+      ],
+
+      "monitoring": [
+        "Track learning update frequency and token cost",
+        "Measure pattern accuracy and user satisfaction",
+        "Monitor cache hit rates for learning predictions",
+        "Assess cross-session learning continuity"
+      ],
+
+      "successMetrics": {
+        "tokenEfficiency": "70-85% reduction in learning-related memory operations",
+        "learningQuality": "No degradation in adaptation accuracy",
+        "userSatisfaction": "Maintained or improved personalization quality",
+        "behaviorConsistency": "Seamless learning despite reduced memory operations"
+      }
+    }
+  }
+}
