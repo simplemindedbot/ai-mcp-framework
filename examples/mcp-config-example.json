@@ -1,0 +1,97 @@
+{
+  "mcpServers": {
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "env": {
+        "MEMORY_FILE_PATH": "~/Library/Application Support/Claude/memory-data/memory.json"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "~/Desktop", "~/Documents"],
+      "description": "File system access for Desktop and Documents"
+    },
+    "web_search": {
+      "command": "npx", 
+      "args": ["-y", "@modelcontextprotocol/server-web-search"],
+      "description": "Web search capabilities"
+    },
+    "fetch": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"],
+      "description": "HTTP fetch capabilities"
+    },
+    "ddg-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-ddg-search"],
+      "description": "DuckDuckGo search server"
+    },
+    "arxiv-research": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-arxiv"],
+      "env": {
+        "ARXIV_STORAGE_PATH": "~/Library/Application Support/Claude/arxiv-papers"
+      },
+      "description": "ArXiv research paper access"
+    },
+    "wikipedia": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-wikipedia"],
+      "description": "Wikipedia content access"
+    },
+    "markitdown": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-markitdown"],
+      "description": "Convert documents to markdown"
+    },
+    "ai-humanizer": {
+      "command": "npx", 
+      "args": ["-y", "@modelcontextprotocol/server-ai-humanizer"],
+      "description": "AI content humanization"
+    },
+    "google_drive_search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-google-drive"],
+      "description": "Google Drive file search and access"
+    },
+    "gmail": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-gmail"],
+      "description": "Gmail access for email search and management"
+    },
+    "mcp-sequentialthinking-tools": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequentialthinking"],
+      "description": "Sequential thinking and analysis tools"
+    }
+  },
+  "description": "MCP server configuration for AI MCP Framework implementation. This configuration provides the essential tools needed for the framework to function: memory for persistent knowledge graphs, filesystem for file operations, web tools for research and verification, productivity tools for real-world tasks, and analysis tools for complex reasoning.",
+  "framework_requirements": {
+    "critical_servers": [
+      "memory",
+      "filesystem", 
+      "web_search",
+      "fetch"
+    ],
+    "recommended_servers": [
+      "ddg-search",
+      "arxiv-research", 
+      "wikipedia",
+      "markitdown",
+      "mcp-sequentialthinking-tools"
+    ],
+    "optional_servers": [
+      "ai-humanizer",
+      "google_drive_search",
+      "gmail"
+    ]
+  },
+  "setup_notes": {
+    "memory_server": "Required for storing framework rules and learning from user interactions",
+    "filesystem_access": "Needed for creating repos, managing files, and implementing framework",
+    "web_tools": "Essential for verification, research, and external validation",
+    "productivity_tools": "Enable real-world task completion and proactive assistance",
+    "analysis_tools": "Support complex reasoning and systematic thinking"
+  }
+}

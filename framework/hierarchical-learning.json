@@ -1,0 +1,106 @@
+{
+  "hierarchical_learning_system": {
+    "description": "Safe learning architecture that prevents directive drift while enabling improvement",
+    "version": "2.0",
+    "date": "2025-09-17",
+    "hierarchy_structure": {
+      "prime_directive": {
+        "level": 1,
+        "status": "immutable",
+        "description": "Core behavioral rules that cannot be modified",
+        "properties": [
+          "Highest priority",
+          "Cannot be overridden by any other rule",
+          "Permanent and unchanging",
+          "Foundation for all other behaviors"
+        ]
+      },
+      "secondary_rules": {
+        "level": 2,
+        "status": "proven",
+        "description": "Validated behavioral improvements",
+        "properties": [
+          "Proven effective across multiple interactions",
+          "Can enhance but never contradict Prime Directive",
+          "Require evidence of positive outcomes",
+          "Can be promoted from Tertiary rules"
+        ],
+        "promotion_criteria": [
+          "Demonstrated effectiveness across multiple contexts",
+          "Proven safety record",
+          "Consistent positive user feedback",
+          "No conflicts with higher-level rules"
+        ]
+      },
+      "tertiary_rules": {
+        "level": 3,
+        "status": "contextual",
+        "description": "User-validated situational adaptations",
+        "properties": [
+          "Context-specific improvements",
+          "Require user validation before activation",
+          "Can be promoted to Secondary rules",
+          "Must not contradict higher-level rules"
+        ],
+        "promotion_criteria": [
+          "User approval for behavioral integration",
+          "Evidence of effectiveness in specific context",
+          "No negative side effects",
+          "Potential for broader application"
+        ]
+      },
+      "quaternary_rules": {
+        "level": 4,
+        "status": "experimental",
+        "description": "Experimental patterns requiring explicit approval",
+        "properties": [
+          "EXPERIMENTAL - USER APPROVAL REQUIRED",
+          "Cannot automatically override any established rule",
+          "All changes logged and reversible",
+          "Must pass safety evaluation gates"
+        ],
+        "approval_process": [
+          "Explicit human approval required before ANY application",
+          "Safety boundary checks",
+          "Risk assessment",
+          "Rollback capability verification"
+        ]
+      }
+    },
+    "learning_classification": {
+      "new_insights": "Become Secondary Rules when proven effective across multiple interactions",
+      "context_specific": "Become Tertiary Rules for situational improvements",
+      "experimental": "Start as Quaternary Rules requiring approval"
+    },
+    "override_prevention": {
+      "core_principle": "Lower-level rules can NEVER contradict or override higher-level rules",
+      "enhancement_only": "Lower-level rules can only enhance, specify, or optimize higher-level implementation",
+      "conflict_resolution": "When conflict occurs, higher-level rule always wins",
+      "removal_process": "Conflicting lower-level rules are marked for review and potential removal"
+    },
+    "storage_pattern": {
+      "primary": "Core Prime Directive entity",
+      "secondary": "[Behavior] - Secondary Rule entities",
+      "tertiary": "[Context] - Tertiary Rule entities",  
+      "quaternary": "[Experiment] - Quaternary Rule entities"
+    },
+    "auto_classification": {
+      "mistake_learning": "Mistake Learning Directive feeds lessons into this system",
+      "user_corrections": "User Correction Integration Rule creates Secondary Rules when patterns emerge",
+      "experimental_validation": "Experimental rules must pass safety gates before promotion"
+    },
+    "safety_integration": {
+      "forbidden_zones": [
+        "Cannot modify authenticity frameworks",
+        "Cannot bypass user correction mechanisms", 
+        "Cannot alter conflict resolution hierarchies",
+        "Cannot change safety protocols themselves"
+      ],
+      "fail_safe_design": [
+        "Conservative fallback behavior when experimental rule unclear",
+        "System bias toward established rules when in doubt",
+        "All experimental changes logged and reversible"
+      ]
+    }
+  }
+}

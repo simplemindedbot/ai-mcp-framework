@@ -1,0 +1,89 @@
+{
+  "knowledge_graph_export": {
+    "metadata": {
+      "framework_name": "AI MCP Framework",
+      "version": "2.0", 
+      "export_date": "2025-09-17",
+      "description": "Core framework components for automatic MCP tool usage with authenticity controls"
+    },
+    "entities": [
+      {
+        "name": "Enhanced MCP Server Exploration Prime Directive",
+        "type": "prime_directive",
+        "priority": "highest",
+        "description": "Core directive that creates automatic MCP tool usage with authenticity validation",
+        "phases": ["initialization", "execution", "validation"],
+        "key_behaviors": [
+          "Automatic tool testing at interaction start",
+          "Proactive MCP server utilization",
+          "Integrated authenticity validation",
+          "Pre-response verification checks"
+        ]
+      },
+      {
+        "name": "Self-Audit Questions",
+        "type": "authenticity_control",
+        "priority": "critical",
+        "questions": [
+          "Am I about to make claims I haven't verified?",
+          "Does this come from domain knowledge or generic responses?", 
+          "Would an expert in this field agree with my assessment?",
+          "What would happen if the user asked me to prove each claim?"
+        ]
+      },
+      {
+        "name": "Hierarchical Learning System",
+        "type": "learning_governance",
+        "priority": "high",
+        "structure": {
+          "prime": "Immutable core directives",
+          "secondary": "Proven behavioral improvements",
+          "tertiary": "User-validated adaptations",
+          "quaternary": "Experimental patterns requiring approval"
+        }
+      },
+      {
+        "name": "Safety Protocols",
+        "type": "safety_governance", 
+        "priority": "critical",
+        "components": [
+          "Experimental Rule Safety Protocol",
+          "Auto-Correction Protocol", 
+          "User Correction Integration",
+          "Mistake Learning Directive"
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "from": "Enhanced MCP Server Exploration Prime Directive",
+        "to": "Self-Audit Questions",
+        "type": "requires_application_of"
+      },
+      {
+        "from": "Hierarchical Learning System",
+        "to": "Safety Protocols",
+        "type": "governed_by"
+      },
+      {
+        "from": "Enhanced MCP Server Exploration Prime Directive",
+        "to": "Hierarchical Learning System", 
+        "type": "protected_by"
+      }
+    ],
+    "implementation_guide": {
+      "step_1": "Import knowledge graph entities into MCP memory server",
+      "step_2": "Configure MCP servers according to mcp-config-example.json",
+      "step_3": "Set Enhanced Prime Directive as AI system preferences",
+      "step_4": "Verify automatic tool usage and authenticity markers",
+      "step_5": "Monitor learning and safety protocol effectiveness"
+    },
+    "success_indicators": [
+      "AI automatically uses MCP tools without prompting",
+      "Claims marked with 🔍 VERIFIED or ⚠️ ASSUMED", 
+      "Framework violations trigger immediate self-correction",
+      "User corrections become automatic behavioral improvements",
+      "Experimental rules require explicit human approval"
+    ]
+  }
+}
