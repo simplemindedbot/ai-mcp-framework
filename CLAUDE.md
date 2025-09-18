@@ -173,6 +173,46 @@ When properly implemented, you should observe:
 - **External verification** for technical claims and assessments
 - **Learning from corrections** with behavioral improvements over time
 
+## Git Branch Strategy
+
+This repository uses a **dual-branch strategy** to separate public framework code from private research documentation:
+
+### Branch Structure
+- **`main` branch**: Public framework code, tools, and documentation
+  - Safe for public GitHub repository
+  - Contains framework implementation and deployment tools
+  - Excludes research papers and sensitive academic content
+
+- **`research-private` branch**: Complete project including research papers
+  - Contains everything from main branch PLUS research documentation
+  - Includes academic papers, breakthrough documentation, and research notes
+  - Keep local or push to separate private repository until ready to publish
+
+### Workflow Commands
+```bash
+# Work on public framework (main branch)
+git checkout main
+git add framework/ tools/ docs/
+git commit -m "Framework updates"
+git push origin main  # Safe for public repo
+
+# Work on research (private branch)
+git checkout research-private
+git add research-paper/
+git commit -m "Research updates"
+# Keep local until ready to publish
+
+# When ready to publish research
+git checkout main
+git merge research-private
+git push origin main  # Publishes everything
+```
+
+### Research Documentation Location
+- `research-paper/`: Academic papers and research documentation (private branch only)
+- `research-paper/TOKEN_OPTIMIZATION_BREAKTHROUGH.md`: Major efficiency breakthrough documentation
+- `research-paper/paper2-autopilot-framework/`: AUTOPILOT framework paper with v2.2 optimizations
+
 ## Safety Notes
 
 - Framework modifications require human approval for experimental rules
@@ -180,3 +220,4 @@ When properly implemented, you should observe:
 - All learning happens through hierarchical rule promotion
 - Safety protocols include automatic rollback capabilities
 - External verification prevents performative behavior
+- Research documentation kept private until ready for academic publication
