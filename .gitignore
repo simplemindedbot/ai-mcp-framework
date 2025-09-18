@@ -109,3 +109,7 @@ secrets/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Research
+research-paper/
+article.md
