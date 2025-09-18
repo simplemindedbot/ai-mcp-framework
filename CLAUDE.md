@@ -20,6 +20,32 @@ python tools/knowledge-graph-importer.py
 python tools/framework-installer.py --config-path ~/.config/mcp/config.json
 ```
 
+### Token Optimization Deployment
+```bash
+# Interactive deployment with comprehensive file discovery
+python tools/deploy-smart-framework.py --interactive
+
+# Quick deployment with specific optimization level
+python tools/deploy-smart-framework.py --optimization optimized    # 70-85% savings
+python tools/deploy-smart-framework.py --optimization lightweight  # 80-90% savings
+python tools/deploy-smart-framework.py --optimization emergency    # 90-95% savings
+
+# Check current framework status
+python tools/deploy-smart-framework.py --status
+
+# Rollback to previous framework
+python tools/deploy-smart-framework.py --rollback
+```
+
+### Usage Analysis and Optimization
+```bash
+# Analyze token usage patterns
+python tools/token-optimizer.py --analyze --daily-interactions 20 --tokens-per-interaction 2000 --daily-budget 50000
+
+# Generate optimization recommendations
+python tools/token-optimizer.py --generate-directive optimized --output optimized-directive.txt
+```
+
 ### Validation and Testing
 ```bash
 # Test MCP server configuration

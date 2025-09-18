@@ -22,9 +22,18 @@ class SmartFrameworkDeployer:
         self.framework_dir = Path(__file__).parent.parent / "framework"
         self.backup_dir = Path.home() / ".claude-framework-backups"
         self.deployment_log = self.backup_dir / "deployment-log.json"
+        self.config_registry = self.backup_dir / "config-registry.json"
+
+        # Initialize tracked configs
+        self.project_configs = []
+        self.new_configs = []
+        self.unknown_configs = []
 
         # Ensure backup directory exists
         self.backup_dir.mkdir(exist_ok=True)
+
+        # Load previous config registry
+        self._load_config_registry()
 
     def _detect_claude_paths(self, custom_path: str = None) -> Dict[str, List[Path]]:
         """Detect all possible Claude configuration paths for both Claude Code and Claude Desktop."""
@@ -38,19 +47,44 @@ class SmartFrameworkDeployer:
 
         home = Path.home()
 
-        # Claude Code CLI config locations
-        claude_code_paths = [
-            home / ".claude" / "CLAUDE.md",
-            home / "CLAUDE.md",
-            home / ".config" / "claude" / "CLAUDE.md",
-            # Project-specific paths
-            Path.cwd() / "CLAUDE.md",
-            Path.cwd() / ".claude" / "CLAUDE.md"
-        ]
+        # Comprehensive search for all CLAUDE.md files
+        import subprocess
+        try:
+            result = subprocess.run([
+                'find', str(home), '-name', '*CLAUDE.md', '-o', '-name', '*claude.md', '-o', '-name', 'CLAUDE.md'
+            ], capture_output=True, text=True, timeout=30)
 
-        for path in claude_code_paths:
-            if path.exists():
-                paths["claude_code"].append(path)
+            if result.returncode == 0:
+                found_paths = [Path(p.strip()) for p in result.stdout.strip().split('\n') if p.strip()]
+
+                # Categorize files using registry and analysis
+                for path in found_paths:
+                    if path.exists():
+                        try:
+                            category = self._classify_config_file(path)
+                            if category == "framework":
+                                paths["claude_code"].append(path)
+                            # Track new files separately
+                            if str(path) not in self.known_configs or self.known_configs[str(path)].get("auto_classified"):
+                                self.new_configs.append(path)
+                        except Exception as e:
+                            print(f"⚠️  Could not analyze {path}: {e}")
+                            self.unknown_configs.append(path)
+
+        except Exception as e:
+            print(f"⚠️  Comprehensive search failed, using fallback: {e}")
+            # Fallback to original detection
+            claude_code_paths = [
+                home / ".claude" / "CLAUDE.md",
+                home / "CLAUDE.md",
+                home / ".config" / "claude" / "CLAUDE.md",
+                Path.cwd() / "CLAUDE.md",
+                Path.cwd() / ".claude" / "CLAUDE.md"
+            ]
+
+            for path in claude_code_paths:
+                if path.exists():
+                    paths["claude_code"].append(path)
 
         # Claude Desktop config locations
         claude_desktop_paths = [
@@ -63,6 +97,179 @@ class SmartFrameworkDeployer:
                 paths["claude_desktop"].append(path)
 
         return paths
+
+    def _load_config_registry(self):
+        """Load previously tracked config classifications."""
+        try:
+            if self.config_registry.exists():
+                with open(self.config_registry, 'r') as f:
+                    registry = json.load(f)
+                    self.known_configs = registry.get("known_configs", {})
+                    self.deployment_history = registry.get("deployment_history", [])
+            else:
+                self.known_configs = {}
+                self.deployment_history = []
+        except Exception as e:
+            print(f"⚠️  Could not load config registry: {e}")
+            self.known_configs = {}
+            self.deployment_history = []
+
+    def _save_config_registry(self):
+        """Save config classifications for future runs."""
+        try:
+            registry = {
+                "known_configs": self.known_configs,
+                "deployment_history": self.deployment_history,
+                "last_updated": datetime.now().isoformat()
+            }
+            with open(self.config_registry, 'w') as f:
+                json.dump(registry, f, indent=2)
+        except Exception as e:
+            print(f"⚠️  Could not save config registry: {e}")
+
+    def _classify_config_file(self, file_path: Path) -> str:
+        """Classify config file as framework, project, or new."""
+        file_key = str(file_path)
+
+        # Check if we've seen this file before
+        if file_key in self.known_configs:
+            return self.known_configs[file_key]["type"]
+
+        # Analyze content for new files
+        analysis_type = self._analyze_claude_file_type(file_path)
+
+        # Register as new config
+        self.known_configs[file_key] = {
+            "type": analysis_type,
+            "first_seen": datetime.now().isoformat(),
+            "size": file_path.stat().st_size if file_path.exists() else 0,
+            "auto_classified": True
+        }
+
+        # Add to appropriate tracking list
+        if analysis_type == "project":
+            self.project_configs.append(file_path)
+        elif analysis_type == "unknown":
+            self.unknown_configs.append(file_path)
+        else:  # framework
+            # Will be added to claude_paths["claude_code"] in detection
+            pass
+
+        return analysis_type
+
+    def _analyze_claude_file_type(self, file_path: Path) -> str:
+        """Analyze CLAUDE.md file to determine if it's a framework config or project-specific."""
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+
+            # Framework indicators
+            framework_indicators = [
+                "Enhanced MCP Server Exploration Prime Directive",
+                "MCP Server Exploration Prime Directive",
+                "prime_directive",
+                "Entity Type: prime_directive",
+                "Auto-applies to: Every user interaction",
+                "INITIALIZATION PHASE",
+                "EXECUTION PHASE",
+                "VALIDATION PHASE"
+            ]
+
+            # Project indicators
+            project_indicators = [
+                "# Claude Code Integration",
+                "## 🐍 Modern Python Development Stack",
+                "Repository Overview",
+                "Project Overview",
+                "Development Stack",
+                "Available Commands",
+                "Project Structure",
+                "Key Commands"
+            ]
+
+            framework_score = sum(1 for indicator in framework_indicators if indicator in content)
+            project_score = sum(1 for indicator in project_indicators if indicator in content)
+
+            # Strong framework indicators
+            if framework_score >= 2:
+                return "framework"
+            # Strong project indicators
+            elif project_score >= 2:
+                return "project"
+            # Small files are likely framework configs
+            elif len(content.split('\n')) < 100 and framework_score > 0:
+                return "framework"
+            # Large files with no framework indicators are likely project configs
+            elif len(content.split('\n')) > 150 and framework_score == 0:
+                return "project"
+            # Default to framework for safety (can be overridden with user confirmation)
+            else:
+                return "framework"
+
+        except Exception as e:
+            print(f"⚠️  Error analyzing {file_path}: {e}")
+            return "unknown"
+
+    def _handle_new_configs(self) -> bool:
+        """Handle newly discovered or created CLAUDE.md files."""
+        if not self.new_configs and not self.unknown_configs:
+            return True
+
+        print(f"\n🔍 New or Updated CLAUDE.md Files Detected:")
+
+        # Show new configs
+        if self.new_configs:
+            print(f"\n📝 New files found ({len(self.new_configs)}):")
+            for i, path in enumerate(self.new_configs, 1):
+                config_type = self.known_configs.get(str(path), {}).get("type", "unknown")
+                size = path.stat().st_size if path.exists() else 0
+                print(f"   {i}. {path} ({config_type}, {size} bytes)")
+
+        # Show unknown configs
+        if self.unknown_configs:
+            print(f"\n❓ Files needing classification ({len(self.unknown_configs)}):")
+            for i, path in enumerate(self.unknown_configs, 1):
+                size = path.stat().st_size if path.exists() else 0
+                print(f"   {i}. {path} ({size} bytes)")
+
+        print(f"\n🎯 Classification Options:")
+        print(f"   f = Framework config (will be optimized)")
+        print(f"   p = Project-specific (won't be modified)")
+        print(f"   s = Skip this time")
+        print(f"   a = Auto-classify all")
+
+        choice = input(f"\nHow should new files be handled? (f/p/s/a) [a]: ").strip().lower()
+
+        if choice == 's':
+            print("⏭️  Skipping new files for this deployment")
+            return True
+        elif choice == 'f':
+            # Classify all as framework
+            for path in self.new_configs + self.unknown_configs:
+                self._reclassify_config(path, "framework")
+                self.claude_paths["claude_code"].append(path)
+            print("✅ All new files classified as framework configs")
+        elif choice == 'p':
+            # Classify all as project
+            for path in self.new_configs + self.unknown_configs:
+                self._reclassify_config(path, "project")
+            print("✅ All new files classified as project configs")
+        else:  # 'a' or default
+            print("✅ Using automatic classification")
+
+        # Save updated registry
+        self._save_config_registry()
+        return True
+
+    def _reclassify_config(self, file_path: Path, new_type: str):
+        """Manually reclassify a config file."""
+        self.known_configs[str(file_path)] = {
+            "type": new_type,
+            "first_seen": self.known_configs.get(str(file_path), {}).get("first_seen", datetime.now().isoformat()),
+            "size": file_path.stat().st_size if file_path.exists() else 0,
+            "auto_classified": False,
+            "user_classified": datetime.now().isoformat()
+        }
 
     def backup_current_framework(self) -> Dict[str, str]:
         """Create backup of current framework configuration."""
@@ -180,6 +387,11 @@ class SmartFrameworkDeployer:
         """Deploy the smart framework with specified optimization level."""
         if not self.validate_framework_components():
             print("❌ Framework validation failed. Aborting deployment.")
+            return False
+
+        # Handle new configs before deployment
+        if not self._handle_new_configs():
+            print("❌ New config handling cancelled deployment.")
             return False
 
         print(f"🚀 Deploying smart framework with {optimization_level} optimization...")
@@ -341,6 +553,10 @@ Learning and authenticity features are preserved but heavily optimized.
             "claude_code_configs": claude_code_configs,
             "claude_desktop_configs": claude_desktop_configs,
             "total_configs": claude_code_configs + claude_desktop_configs,
+            "project_configs": len(self.project_configs),
+            "new_configs": len(self.new_configs),
+            "unknown_configs": len(self.unknown_configs),
+            "total_found": claude_code_configs + claude_desktop_configs + len(self.project_configs),
             "backup_available": self.deployment_log.exists(),
             "smart_components_ready": self.validate_framework_components()
         }
@@ -407,15 +623,24 @@ Learning and authenticity features are preserved but heavily optimized.
         status = self.status_check()
         print(f"\n📊 Current Status:")
         print(f"   Overall Framework: {status['current_framework']}")
-        print(f"   Claude Code configs: {status['claude_code_configs']}")
+        print(f"   ")
+        print(f"   📁 Configuration Discovery:")
+        print(f"      Framework configs: {status['claude_code_configs']} (will be optimized)")
         if status.get('claude_code_framework'):
-            print(f"     └─ Claude Code: {status['claude_code_framework']}")
-        print(f"   Claude Desktop configs: {status['claude_desktop_configs']}")
+            print(f"        └─ Currently: {status['claude_code_framework']}")
+        print(f"      Claude Desktop: {status['claude_desktop_configs']} memory systems")
         if status.get('claude_desktop_framework'):
-            print(f"     └─ Claude Desktop: {status['claude_desktop_framework']}")
-        print(f"   Total configs found: {status['total_configs']}")
-        print(f"   Backup available: {status['backup_available']}")
-        print(f"   Smart components ready: {status['smart_components_ready']}")
+            print(f"        └─ Currently: {status['claude_desktop_framework']}")
+        print(f"      Project configs: {status['project_configs']} (will be preserved)")
+        if status['new_configs'] > 0:
+            print(f"      🆕 New files: {status['new_configs']} (needs classification)")
+        if status['unknown_configs'] > 0:
+            print(f"      ❓ Unknown files: {status['unknown_configs']} (needs classification)")
+        print(f"      Total found: {status['total_found']} CLAUDE.md files")
+        print(f"   ")
+        print(f"   🔧 Deployment Ready:")
+        print(f"      Backup available: {status['backup_available']}")
+        print(f"      Smart components: {status['smart_components_ready']}")
 
         if not status['smart_components_ready']:
             print("\n❌ Smart framework components not found. Please run from framework directory.")

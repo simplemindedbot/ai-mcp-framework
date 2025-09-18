@@ -10,17 +10,18 @@ The AI MCP Framework creates automatic, proactive tool usage through a multi-lay
 ┌─────────────────────────────────────────────────────────────┐
 │                    AI System Layer                         │
 ├─────────────────────────────────────────────────────────────┤
-│  Enhanced MCP Server Exploration Prime Directive (v2.0)    │
+│  Enhanced MCP Server Exploration Prime Directive (v2.2)    │
 │  ┌─────────────────┬─────────────────┬─────────────────┐    │
 │  │ INITIALIZATION  │   EXECUTION     │   VALIDATION    │    │
-│  │ - Load Framework│ - Proactive Use │ - Authenticity  │    │
-│  │ - Test Tools    │ - Auto Selection│ - Verification  │    │
+│  │ - Smart Caching │ - Proactive Use │ - Authenticity  │    │
+│  │ - Cached Testing│ - Auto Selection│ - Verification  │    │
 │  └─────────────────┴─────────────────┴─────────────────┘    │
 ├─────────────────────────────────────────────────────────────┤
 │                 Authenticity Layer                         │
 │  ┌─────────────────┬─────────────────┬─────────────────┐    │
-│  │ Self-Audit      │ External        │ Observable      │    │
-│  │ Questions       │ Verification    │ Metrics         │    │
+│  │ Cached          │ External        │ Observable      │    │
+│  │ Self-Audit      │ Verification    │ Metrics         │    │
+│  │ Questions       │ (Selective)     │ (User-Adaptive) │    │
 │  └─────────────────┴─────────────────┴─────────────────┘    │
 ├─────────────────────────────────────────────────────────────┤
 │                 Learning Layer                             │
@@ -36,6 +37,13 @@ The AI MCP Framework creates automatic, proactive tool usage through a multi-lay
 │  │ Rule Safety     │ Protocol        │ Integration     │    │
 │  └─────────────────┴─────────────────┴─────────────────┘    │
 ├─────────────────────────────────────────────────────────────┤
+│                Token Optimization Layer                    │
+│  ┌─────────────────┬─────────────────┬─────────────────┐    │
+│  │ Session Memory  │ Incremental     │ Smart Tool      │    │
+│  │ Cache System    │ Learning        │ Testing         │    │
+│  │ (70-85% savings)│ (Delta Updates) │ (Cached Results)│    │
+│  └─────────────────┴─────────────────┴─────────────────┘    │
+├─────────────────────────────────────────────────────────────┤
 │                 MCP Server Layer                           │
 │  ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐    │
 │  │Mem  │FS   │Web  │Fetch│Research│Prod │Anal │Proc │...│    │
@@ -43,33 +51,81 @@ The AI MCP Framework creates automatic, proactive tool usage through a multi-lay
 └─────────────────────────────────────────────────────────────┘
 ```
 
+## Token Optimization Architecture
+
+### Smart Memory Caching System
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                Session Memory Cache                         │
+│                                                             │
+│  ┌─────────────────┬─────────────────┬─────────────────┐    │
+│  │ User Preferences│ Authenticity    │ Tool Availability│    │
+│  │ • Interaction   │ Rules           │ • Server Status │    │
+│  │   patterns      │ • Self-audit    │ • Performance   │    │
+│  │ • Tool prefs    │   questions     │ • Failure cache│    │
+│  │ • Comm style    │ • Validation    │ • Test results  │    │
+│  │ • Expertise     │   patterns      │                 │    │
+│  └─────────────────┴─────────────────┴─────────────────┘    │
+│                           ↕                                │
+│  ┌─────────────────┬─────────────────┬─────────────────┐    │
+│  │ Learning        │ Session         │ Emergency       │    │
+│  │ Patterns        │ Context         │ Conservation    │    │
+│  │ • Corrections   │ • Current task  │ • Minimal ops   │    │
+│  │ • Adaptations   │ • Temp prefs    │ • Deferred      │    │
+│  │ • Improvements  │ • Context data  │   updates       │    │
+│  └─────────────────┴─────────────────┴─────────────────┘    │
+│                                                             │
+│  Cache Refresh Triggers:                                   │
+│  • User corrections (immediate)                            │
+│  • Session >30 minutes (validation)                       │
+│  • Tool failures (incremental)                            │
+│  • Session end (batch update)                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Token Conservation Strategies
+
+1. **Query Deduplication**: Never repeat memory queries within session
+2. **Contextual Caching**: Maintain rich context to avoid re-querying
+3. **Batch Operations**: Group memory operations when possible
+4. **Delta Updates**: Store only changes, not full state
+5. **Smart Invalidation**: Update cache only when necessary
+
+### Efficiency Metrics
+
+- **Memory Queries**: Reduced from per-interaction to per-session (70-85% reduction)
+- **Tool Testing**: Cached for session duration vs. every interaction
+- **Learning Updates**: Batched at natural conversation breaks
+- **Authenticity Validation**: User-calibrated levels vs. maximum always
+
 ## Component Interactions
 
 ### 1. Initialization Phase
 
-**Flow**: User Input → Framework Loading → Tool Testing → Capability Assessment
+**Flow**: User Input → Framework Loading → Smart Tool Testing → Capability Assessment
 
-- **Framework Loading**: Query memory system for authenticity controls and safety protocols
-- **Tool Testing**: Verify MCP server accessibility and basic functionality  
-- **Capability Assessment**: Create inventory of functional vs. non-functional tools
+- **Framework Loading**: Load cached authenticity controls and safety protocols (first interaction: query memory, subsequent: use cache)
+- **Smart Tool Testing**: Check cached tool availability, test only critical servers or on failures
+- **Capability Assessment**: Create inventory of functional vs. non-functional tools from cached + tested data
 - **Transparency**: Document any limitations or failures for user awareness
 
 ### 2. Execution Phase
 
 **Flow**: Task Analysis → Tool Selection → Proactive Utilization → Authenticity Validation
 
-- **Task Analysis**: Evaluate which MCP servers could provide value
-- **Tool Selection**: Automatically choose appropriate tools based on task requirements
-- **Proactive Utilization**: Use tools without waiting for explicit user requests
-- **Authenticity Validation**: Apply self-audit questions throughout execution
+- **Task Analysis**: Evaluate which MCP servers could provide value (using cached user preferences)
+- **Tool Selection**: Automatically choose appropriate tools based on learned patterns and cached tool performance
+- **Proactive Utilization**: Use tools without waiting for explicit user requests (prioritize previously successful combinations)
+- **Authenticity Validation**: Apply cached self-audit questions with user-calibrated validation levels
 
 ### 3. Validation Phase
 
 **Flow**: Pre-Response Check → Verification Marking → Learning Integration → Response Delivery
 
-- **Pre-Response Check**: Mandatory validation for claims and assessments
-- **Verification Marking**: Tag claims as 🔍 VERIFIED or ⚠️ ASSUMED
-- **Learning Integration**: Document patterns and effectiveness for future improvement
+- **Pre-Response Check**: Selective validation based on cached reliability patterns and user expertise level
+- **Verification Marking**: Tag claims as 🔍 VERIFIED or ⚠️ ASSUMED (only when verification actually performed)
+- **Learning Integration**: Batch patterns and effectiveness data for efficient memory updates
 - **Response Delivery**: Deliver validated, marked response to user
 
 ## Data Flow Architecture
