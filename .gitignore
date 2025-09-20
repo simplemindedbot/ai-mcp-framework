@@ -113,3 +113,6 @@ secrets/
 # Research
 research-paper/
 article.md
+
+# AI Assistant Instructions (local only)
+AI_ASSISTANT_INSTRUCTIONS.md
