@@ -39,28 +39,54 @@ class TokenOptimizer:
                 "tool_testing": "full",
                 "authenticity_validation": "complete",
                 "verification_markers": "always",
-                "learning_integration": "continuous"
+                "learning_integration": "continuous",
+                "directive_source": "prime-directive-v2.2.txt",
+                "token_savings": "0%"
             },
             "optimized": {
                 "memory_queries_per_session": 10,
                 "tool_testing": "cached",
                 "authenticity_validation": "selective",
                 "verification_markers": "conditional",
-                "learning_integration": "batched"
+                "learning_integration": "batched",
+                "directive_source": "prime-directive-v2.2.txt",
+                "token_savings": "70-85%"
             },
             "lightweight": {
                 "memory_queries_per_session": 3,
                 "tool_testing": "on_demand",
                 "authenticity_validation": "minimal",
                 "verification_markers": "technical_only",
-                "learning_integration": "session_end"
+                "learning_integration": "session_end",
+                "directive_source": "prime-directive-v2.3-ultra-compact.txt",
+                "token_savings": "80-90%"
             },
             "emergency": {
                 "memory_queries_per_session": 0,
                 "tool_testing": "disabled",
                 "authenticity_validation": "cached_only",
                 "verification_markers": "none",
-                "learning_integration": "disabled"
+                "learning_integration": "disabled",
+                "directive_source": "prime-directive-v2.3-ultra-compact.txt",
+                "token_savings": "85-95%"
+            },
+            "skeleton": {
+                "memory_queries_per_session": 0,
+                "tool_testing": "disabled",
+                "authenticity_validation": "none",
+                "verification_markers": "none",
+                "learning_integration": "disabled",
+                "directive_source": "minimal_directive",
+                "token_savings": "90-98%"
+            },
+            "dynamic": {
+                "memory_queries_per_session": "context_based",
+                "tool_testing": "intelligent",
+                "authenticity_validation": "adaptive",
+                "verification_markers": "contextual",
+                "learning_integration": "smart_batching",
+                "directive_source": "embedding_retrieval",
+                "token_savings": "95-99%"
             }
         }
         return configs.get(level, configs["standard"])
@@ -214,9 +240,11 @@ Use when token budget allows for maximum AI capabilities."""
         """Calculate estimated token savings for optimization level."""
         savings = {
             "standard": "0%",
-            "optimized": "30-50%",
-            "lightweight": "60-80%",
-            "emergency": "85-95%"
+            "optimized": "70-85%",
+            "lightweight": "80-90%",
+            "emergency": "85-95%",
+            "skeleton": "90-98%",
+            "dynamic": "95-99%"
         }
         return savings.get(level, "0%")
 
@@ -227,7 +255,7 @@ def main():
     parser.add_argument("--daily-interactions", type=int, help="Average daily interactions")
     parser.add_argument("--tokens-per-interaction", type=int, help="Average tokens per interaction")
     parser.add_argument("--daily-budget", type=int, help="Daily token budget")
-    parser.add_argument("--generate-directive", choices=["standard", "optimized", "lightweight", "emergency"])
+    parser.add_argument("--generate-directive", choices=["standard", "optimized", "lightweight", "emergency", "skeleton", "dynamic"])
     parser.add_argument("--output", help="Output file for generated directive")
 
     args = parser.parse_args()
